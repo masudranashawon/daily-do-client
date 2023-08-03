@@ -1,7 +1,5 @@
-import variables from './variables.module.scss'
-
 const HomePage = () => {
-  return <h1 style={{ color: variables.primaryColor }}>Hello, Next.js!</h1>
-}
+  return <h1 className='head'>Hello, Next.js!</h1>;
+};
 
-export default HomePage
+export default HomePage;

@@ -1,0 +1,78 @@
+@use "mixins" as *;
+
+$primary-color: #6a5eef;
+$secondary-color: #8bc34a;
+$accent-color: #800080;
+$dark-color: #000000;
+$light-color: #f4f4f4;
+
+:export {
+  primaryColor: $primary-color;
+  secondaryColor: $secondary-color;
+  accentColor: $accent-color;
+  darkColor: $dark-color;
+  light: $light-color;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: $light-color;
+}
+
+a {
+  text-decoration: none;
+}
+
+header {
+  @include container;
+  height: 5rem;
+  display: flex;
+  background-color: $primary-color;
+  border-radius: 1.5rem;
+  box-shadow: 1px 1px 4px $primary-color;
+  margin-top: 1rem;
+
+  .logo {
+    color: $light-color;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.5rem;
+  }
+
+  .menu-wrapper {
+    @include menu-wrapper;
+    width: 100%;
+    display: flex;
+  }
+
+  .nav {
+    display: flex;
+    gap: 1.2rem;
+  }
+
+  .nav .links {
+    display: flex;
+    gap: 1.2rem;
+  }
+
+  .nav .links a {
+    color: $dark-color;
+    transition: all 0.3s;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+  .nav .links a:hover {
+    color: $accent-color;
+  }
+}
