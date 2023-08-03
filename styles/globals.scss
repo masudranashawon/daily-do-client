@@ -1,19 +1,23 @@
+/* ====================
+  Responsive file used
+  =====================
+*/
 @use "mixins" as *;
 
+/* ====================
+  variables
+  =====================
+*/
 $primary-color: #6a5eef;
 $secondary-color: #8bc34a;
 $accent-color: #800080;
 $dark-color: #000000;
 $light-color: #f4f4f4;
 
-:export {
-  primaryColor: $primary-color;
-  secondaryColor: $secondary-color;
-  accentColor: $accent-color;
-  darkColor: $dark-color;
-  light: $light-color;
-}
-
+/* ====================
+  Global SCSS
+  =====================
+*/
 * {
   margin: 0;
   box-sizing: border-box;
@@ -34,9 +38,16 @@ a {
   text-decoration: none;
 }
 
+main {
+  min-height: 100vh;
+}
+/* ====================
+  Header
+  =====================
+*/
 header {
   @include container;
-  height: 5rem;
+  height: 6rem;
   display: flex;
   background-color: $primary-color;
   border-radius: 1.5rem;
@@ -74,5 +85,21 @@ header {
   }
   .nav .links a:hover {
     color: $accent-color;
+  }
+}
+
+/* ====================
+  Footer
+  =====================
+*/
+footer {
+  @include container;
+  background: $accent-color;
+  border-radius: 1.2rem 1.2rem 0rem 0rem;
+  text-align: center;
+  color: $light-color;
+  box-shadow: -1px -1px 4px $accent-color;
+  p {
+    padding: 2rem;
   }
 }
