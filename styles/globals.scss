@@ -43,6 +43,7 @@ main {
   min-height: 100vh;
   padding: 5rem 0;
 }
+
 /* ====================
   Header
   =====================
@@ -90,16 +91,19 @@ header {
     color: $accent-color;
   }
 }
+
 /* ====================
-  Login
+  Login & Signup
   =====================
 */
-.login-page {
+.login-page,
+.signup-page {
   section {
     @include container;
   }
 
-  .login-form {
+  .login-form,
+  .signup-form {
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
@@ -175,6 +179,7 @@ header {
     }
   }
 }
+
 /* ====================
   Footer
   =====================

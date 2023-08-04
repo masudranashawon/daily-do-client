@@ -3,16 +3,28 @@
 import Link from "next/link";
 import { useState } from "react";
 
-const LoginPage = () => {
+const SignupPage = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   return (
-    <main className='login-page'>
+    <main className='signup-page'>
       <section>
-        <form className='login-form'>
-          <h2>Login</h2>
+        <form className='signup-form'>
+          <h2>Signup</h2>
 
+          <div className='form-ctrl'>
+            <label htmlFor='name'>Name</label>
+            <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              type='text'
+              id='name'
+              placeholder='e.g Samantha Parker'
+              required
+            />
+          </div>
           <div className='form-ctrl'>
             <label htmlFor='email'>Email address</label>
             <input
@@ -38,13 +50,13 @@ const LoginPage = () => {
           </div>
 
           <button type='submit' className='submit'>
-            Login
+            Signup
           </button>
 
           <div className='signup-link'>
             <p>
-              {"Haven't Account? "}
-              <Link href='/signup'>Create an Account</Link>
+              {"Already have an Account? "}
+              <Link href='/login'>Login</Link>
             </p>
           </div>
         </form>
@@ -53,4 +65,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignupPage;
