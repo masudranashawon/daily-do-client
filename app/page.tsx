@@ -1,9 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuthContext } from "@/hooks/useAuthContext";
 
 const HomePage = () => {
   const [addTodo, setAddTodo] = useState("");
+  const { state } = useAuthContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!state?.user) {
+      router.push("/login");
+    }
+  }, [router, state?.user]);
 
   return (
     <main className='home-page'>

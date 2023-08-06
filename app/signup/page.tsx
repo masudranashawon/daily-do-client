@@ -1,17 +1,37 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useSignup } from "@/hooks/useSignup";
+import { useAuthContext } from "@/hooks/useAuthContext";
 import Link from "next/link";
-import { useState } from "react";
 
-const SignupPage = () => {
+const SignupPage: React.FC = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { signup, error, loading } = useSignup();
+  const { state } = useAuthContext();
+  const router = useRouter();
+
+  const handleSignup = async (e: any) => {
+    e.preventDefault();
+
+    //Signup user
+    await signup(name, email, password);
+  };
+
+  useEffect(() => {
+    if (state?.user) {
+      router.push("/");
+    }
+  }, [router, state?.user]);
+
   return (
     <main className='signup-page'>
       <section>
-        <form className='signup-form'>
+        <form onSubmit={handleSignup} className='signup-form'>
           <h2>Signup</h2>
 
           <div className='form-ctrl'>
@@ -49,9 +69,11 @@ const SignupPage = () => {
             />
           </div>
 
-          <button type='submit' className='submit'>
+          <button disabled={loading} type='submit' className='submit'>
             Signup
           </button>
+
+          {error && <p className='error'>{error}</p>}
 
           <div className='signup-link'>
             <p>

@@ -78,6 +78,23 @@ header {
   .nav .links {
     display: flex;
     gap: 1.2rem;
+    justify-items: center;
+    align-items: center;
+  }
+
+  .nav .links h3 {
+    color: $light-color;
+  }
+
+  .nav .links button {
+    background-color: $accent-color;
+    padding: 1rem 1.2rem;
+    border-radius: 0.4rem;
+    color: inherit;
+    font-size: 1rem;
+    color: $light-color;
+    font-weight: 600;
+    cursor: pointer;
   }
 
   .nav .links a {
@@ -176,6 +193,11 @@ header {
       text-decoration: underline;
       color: $primary-color;
       font-weight: 500;
+    }
+
+    .error {
+      color: rgb(231, 26, 67);
+      font-weight: 600;
     }
   }
 }
