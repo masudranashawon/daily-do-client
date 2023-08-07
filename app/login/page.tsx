@@ -1,11 +1,26 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useAuthContext } from "@/hooks/useAuthContext";
 import Link from "next/link";
-import { useState } from "react";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { state } = useAuthContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state?.user) {
+      router.push("/");
+    }
+  }, [router, state?.user]);
+
+  if (state?.user) {
+    return null;
+  }
 
   return (
     <main className='login-page'>

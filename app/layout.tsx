@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "../styles/globals.scss";
 import { AuthContextProvider } from "@/contexts/AuthContext";
+import { initialState } from "@/contexts/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,13 +16,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  initialState: any,
 }: {
   children: React.ReactNode;
+  initialState: typeof initialState;
 }) {
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <AuthContextProvider>
+        <AuthContextProvider initialState={initialState}>
           <Navbar />
           {children}
           <Footer />

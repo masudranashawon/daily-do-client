@@ -6,6 +6,7 @@ import { useAuthContext } from "@/hooks/useAuthContext";
 
 const HomePage = () => {
   const [addTodo, setAddTodo] = useState("");
+
   const { state } = useAuthContext();
   const router = useRouter();
 
@@ -14,6 +15,10 @@ const HomePage = () => {
       router.push("/login");
     }
   }, [router, state?.user]);
+
+  if (!state?.user) {
+    return null;
+  }
 
   return (
     <main className='home-page'>

@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 
 interface SignupResponse {
+  _id: string;
   name: string;
   email: string;
-  password: string;
+  createdAt: string;
+  updatedAt: string;
   error?: string;
 }
 
@@ -44,7 +46,10 @@ export const useSignup = () => {
 
     if (res.ok) {
       //Update auth context
-      dispatch({ type: "LOGIN", payload: json });
+      dispatch({
+        type: "LOGIN",
+        payload: json,
+      });
 
       //Save user into local storage
       localStorage.setItem("user", JSON.stringify(json));

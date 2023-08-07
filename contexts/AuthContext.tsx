@@ -4,9 +4,11 @@ import { createContext, useReducer } from "react";
 
 // Define the types
 interface User {
+  _id: string;
   name: string;
   email: string;
-  password: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 interface AuthState {
@@ -16,11 +18,10 @@ interface AuthState {
 type AuthAction = { type: "LOGIN"; payload: User } | { type: "LOGOUT" };
 
 // Define the initial state
-const initialState: AuthState = {
-  user:
-    typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("user") || "null")
-      : null,
+export const initialState: AuthState = {
+  user: typeof localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user") || "null")
+    : null,
 };
 
 export const authReducer = (
@@ -52,9 +53,10 @@ export const AuthContext = createContext<{
   dispatch: () => null,
 });
 
-export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const AuthContextProvider: React.FC<{
+  children: React.ReactNode;
+  initialState: AuthState;
+}> = ({ children, initialState }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   return (

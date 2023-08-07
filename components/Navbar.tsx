@@ -1,10 +1,18 @@
 "use client";
 
 import { useAuthContext } from "@/hooks/useAuthContext";
+import { useLogout } from "@/hooks/useLogout";
 import Link from "next/link";
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   const { state } = useAuthContext();
+  const { logout } = useLogout();
+
+  const user: any = state.user;
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <header className='header'>
@@ -14,17 +22,22 @@ const Navbar = () => {
         </Link>
 
         <nav className='nav'>
-          {state && (
+          {user && (
             <div className='links'>
-              <h3>{state.user.user.name}</h3>
-              <button>Logout</button>
+              <p className='welcome-msg'>
+                Welcome, <span className='user-name'>{user?.user?.name}</span>
+              </p>
+              <button onClick={handleLogout}>Logout</button>
             </div>
           )}
 
-          {!state && (
+          {!user && (
             <div className='links'>
               <Link href='/login'>Login</Link>
               <Link href='/signup'>Signup</Link>
+              <p className='welcome-msg'>
+                Welcome <span>Guest</span>
+              </p>
             </div>
           )}
         </nav>

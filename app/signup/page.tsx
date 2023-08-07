@@ -28,6 +28,10 @@ const SignupPage: React.FC = () => {
     }
   }, [router, state?.user]);
 
+  if (state?.user) {
+    return null;
+  }
+
   return (
     <main className='signup-page'>
       <section>

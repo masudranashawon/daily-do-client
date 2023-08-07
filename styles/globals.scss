@@ -32,16 +32,22 @@ html,
 body {
   width: 100vw;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 body {
   background-color: $light-color;
+  min-height: 100vh;
   color: $dark-color;
 }
 
 main {
   min-height: 100vh;
   padding: 5rem 0;
+}
+
+section {
+  min-height: 100vh;
 }
 
 /* ====================
@@ -89,7 +95,7 @@ header {
   .nav .links button {
     background-color: $accent-color;
     padding: 1rem 1.2rem;
-    border-radius: 0.4rem;
+    border-radius: 1.1rem;
     color: inherit;
     font-size: 1rem;
     color: $light-color;
@@ -106,6 +112,19 @@ header {
 
   .nav .links a:hover {
     color: $accent-color;
+  }
+
+  .welcome-msg {
+    font-size: 1.2rem;
+    font-weight: 500;
+
+    span {
+      font-weight: 700;
+    }
+
+    .user-name {
+      color: $light-color;
+    }
   }
 }
 
