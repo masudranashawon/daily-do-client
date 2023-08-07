@@ -59,6 +59,17 @@ export const AuthContextProvider: React.FC<{
 }> = ({ children, initialState }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
+  // Load user data from localStorage on the client side
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        const parsedUser = JSON.parse(storedUser);
+        dispatch({ type: "LOGIN", payload: parsedUser });
+      }
+    }
+  }, []); // Run this effect only once
+
   return (
     <AuthContext.Provider value={{ state, dispatch }}>
       {children}
