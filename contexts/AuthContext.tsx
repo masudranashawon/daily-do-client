@@ -19,9 +19,10 @@ type AuthAction = { type: "LOGIN"; payload: User } | { type: "LOGOUT" };
 
 // Define the initial state
 export const initialState: AuthState = {
-  user: typeof localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user") || "null")
-    : null,
+  user:
+    typeof window !== "undefined" && localStorage.getItem("user")
+      ? JSON.parse(localStorage.getItem("user") || "null")
+      : null,
 };
 
 export const authReducer = (
@@ -58,17 +59,6 @@ export const AuthContextProvider: React.FC<{
   initialState: AuthState;
 }> = ({ children, initialState }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
-
-  // Load user data from localStorage on the client side
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedUser = localStorage.getItem("user");
-      if (storedUser) {
-        const parsedUser = JSON.parse(storedUser);
-        dispatch({ type: "LOGIN", payload: parsedUser });
-      }
-    }
-  }, []); // Run this effect only once
 
   return (
     <AuthContext.Provider value={{ state, dispatch }}>
