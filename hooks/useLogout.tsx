@@ -1,3 +1,5 @@
+"use client";
+
 import { useAuthContext } from "@/hooks/useAuthContext";
 
 export const useLogout = () => {

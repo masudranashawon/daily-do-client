@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 
 // Define the types
 interface User {
@@ -58,6 +58,15 @@ export const AuthContextProvider: React.FC<{
   initialState: AuthState;
 }> = ({ children, initialState }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
+
+  //  Load user data from localStorage on the client side
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      dispatch({ type: "LOGIN", payload: parsedUser });
+    }
+  }, []); // Run this effect only once
 
   return (
     <AuthContext.Provider value={{ state, dispatch }}>
