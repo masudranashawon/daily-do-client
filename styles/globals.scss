@@ -124,6 +124,7 @@ header {
 
     .user-name {
       color: $light-color;
+      text-transform: capitalize;
     }
   }
 }

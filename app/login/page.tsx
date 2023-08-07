@@ -3,14 +3,23 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "@/hooks/useAuthContext";
+import { useLogin } from "@/hooks/useLogin";
 import Link from "next/link";
 
-const LoginPage = () => {
+const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { login, error, loading } = useLogin();
   const { state } = useAuthContext();
   const router = useRouter();
+
+  const handleLogin = async (e: any) => {
+    e.preventDefault();
+
+    //Login user
+    await login(email, password);
+  };
 
   useEffect(() => {
     if (state?.user) {
@@ -25,7 +34,7 @@ const LoginPage = () => {
   return (
     <main className='login-page'>
       <section>
-        <form className='login-form'>
+        <form onSubmit={handleLogin} className='login-form'>
           <h2>Login</h2>
 
           <div className='form-ctrl'>
@@ -52,9 +61,11 @@ const LoginPage = () => {
             />
           </div>
 
-          <button type='submit' className='submit'>
+          <button disabled={loading} type='submit' className='submit'>
             Login
           </button>
+
+          {error && <p className='error'>{error}</p>}
 
           <div className='signup-link'>
             <p>
